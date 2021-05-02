@@ -9,9 +9,30 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here 
-    fluidPage(
-      h1("ACLOlderAmericansProfile")
-    )
+    shiny::fluidPage(
+      theme = bs_theme(version = 4, bootswatch = "pulse") %>%
+      
+      bs_add_variables(
+        "body-bg" = "#EEEEEE",
+        "font-family-base" = "Futura",
+        "font-size-base" = "1.4rem",
+        "btn-padding-y" = ".16rem",
+        "btn-padding-x" = "2rem"
+      ),
+      shiny::titlePanel( "Profile of Older Americans"
+        
+      ),
+      
+      hr(),
+    
+      mod_population_65_plus_ui("population_65_plus_ui_1"),
+      
+      hr(),
+      h1("State Data"),
+      mod_states_ui("states_ui_1")
+      
+      
+      )
   )
 }
 

@@ -1,0 +1,61 @@
+---
+title: "Get Data"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+#library(ACLOlderAmericansProfile)
+library(polite)
+library(rvest)
+
+```
+
+
+```{r}
+session <- polite::bow("https://acl.gov/aging-and-disability-in-america/data-and-research/profile-older-americans")
+
+session
+```
+
+
+url_absolute(html_attr(cast, "href"), url)
+```{r}
+profile <- rvest::read_html("https://acl.gov/aging-and-disability-in-america/data-and-research/profile-older-americans")
+
+profile_a <- profile %>% html_elements("a") 
+  #profile_e %>% html_text2() 
+  #profile_a %>% html_attr("href") 
+  #profile_e %>% html_attr("link")
+  
+class(profile_a)
+  
+  #url_absolute(html_attr("href"), url)
+  
+profile_a
+
+links <- url_absolute(html_attr(profile_a, "href"), url)
+
+links
+
+```
+
+
+
+```{r}
+
+#class(links)
+
+links <- profile_a[grep(".xls", profile_a)] 
+  
+
+links <- url_absolute(html_attr(links, "href"), url)
+
+
+```
+

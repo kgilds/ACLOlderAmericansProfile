@@ -1,0 +1,51 @@
+---
+title: 
+author: 
+date: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{scss, echo = FALSE}
+@media (min-width: 800px) {
+  .usage {
+    display: flex;
+    * {
+      flex: 1;
+    }
+  }
+}
+div.info {
+  padding: 2em;
+  margin: 1em 0;
+  padding-left: 100px;
+  background-size: 70px;
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  min-height: 120px;
+  color: #1f5386;
+  background-color: #f9a21a;
+  border: solid 5px #dfedff;
+  background-image: url("infobox.svg");
+  a {
+    color: #e783b8;
+  }
+}
+```
+
+
+
+
+::: {.info}
+* As people age the need for caregiving increases
+
+* Those 85 and older are more likely to need personal assistance
+  
+  
+* The percent of the population older than 85 is projected to double from 6.5 million in 2018 to 14.4 million in 2040. 
+:::
