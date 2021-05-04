@@ -12,7 +12,27 @@ mod_states_ui <- function(id){
   #tagList(
   bs4Dash::bs4TabItem(
     tabName = "states_ui_1",
-    shiny::plotOutput(ns("state_num"))
+    
+    fluidRow(
+      bs4Dash::bs4Card(
+        title = "Population 65 & older by State",
+        width = 6,
+        status = "purple",
+        maximizable = TRUE,
+        descriptionBlock(
+          number =  "",
+          header = "Number of Entries",
+          
+          number_color =  "danger",
+          right_border =   TRUE,
+          margin_bottom =  FALSE
+        ),
+        
+        shiny::plotOutput(ns("state_num"))
+        
+      )
+    )
+    
     
     
   )  
