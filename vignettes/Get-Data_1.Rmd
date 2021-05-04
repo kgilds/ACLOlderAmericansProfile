@@ -1,0 +1,141 @@
+---
+title: "Get-Data_1"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(httr)
+library(readxl)
+library(dplyr)
+library(esquisse)
+```
+
+```{r}
+profile_2019 <- ("https://acl.gov/sites/default/files/Aging%20and%20Disability%20in%20America/2019OlderAmericansData.xlsx")
+
+#url_district <- ("http://www.fldoe.org/core/fileparse.php/18534/urlt/DistrictGrades19.xls")
+
+
+
+httr::GET(profile_2019, write_disk(profile_2019 <- tempfile(fileext = ".xlsx")))
+```
+
+```{r}
+p_2019 <- readxl::read_xlsx(profile_2019)
+
+excel_sheets(profile_2019)
+
+```
+
+```{r}
+read_dat <- function(df, sheet){
+  readxl::read_excel(df, sheet = sheet, skip =2 )
+}
+```
+
+```{r}
+person_65_p <- read_excel(profile_2019, sheet = 1, skip =2) %>%
+  
+
+dplyr::glimpse()
+```
+
+```{r eval = FALSE}
+esquisse::esquisser(person_65_p)
+```
+
+```{r}
+maritial_status <- read_excel(profile_2019, sheet = 2, skip =2)
+
+maritial_status
+```
+
+```{r}
+living_arrangement <- read_excel(profile_2019, sheet = 3, skip = 2)
+
+living_arrangement
+```
+
+```{r}
+state_percent_65 <- read_excel(profile_2019, sheet =4, skip = 2)
+
+state_percent_65
+```
+
+```{r}
+state_increas <- read_excel(profile_2019, sheet = 5, skip = 2)
+
+state_increas
+
+```
+
+```{r}
+pop_state <- read_excel(profile_2019, sheet = 6, skip =  2)
+
+pop_state
+```
+
+```{r}
+family_income <- read_excel(profile_2019, sheet = 7, skip = 2)
+
+family_income
+```
+
+```{r}
+
+personal_income <- read_dat(profile_2019, 8)
+
+personal_income
+
+```
+
+```{r}
+poverty <- read_dat(profile_2019, 9)
+
+poverty
+```
+
+```{r}
+employment <- read_dat(profile_2019, 10)
+
+employment
+```
+
+```{r}
+health_insurance <- read_dat(profile_2019, 11)
+
+health_insurance
+```
+
+```{r}
+disability <- read_dat(profile_2019, 12)
+
+disability 
+```
+
+```{r}
+
+Aerobic <- read_dat(profile_2019, 13)
+
+Aerobic
+```
+
+```{r}
+overweight <- read_dat(profile_2019, 14)
+
+overweight
+```
+
+```{r}
+
+Overweight_2008_2016 <- read_dat(profile_2019, 15)
+
+Overweight_2008_2016
+
+```

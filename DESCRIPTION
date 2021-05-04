@@ -7,9 +7,17 @@ License: What license is it under?
 Imports: 
     config,
     golem,
-    shiny
+    shiny,
+    ggplot2,
+    fullPage,
+    bslib,
+    usmap
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 URL: https://github.com/kgilds/ACLOlderAmericansProfile
 BugReports: https://github.com/kgilds/ACLOlderAmericansProfile/issues
+Suggests: 
+    rmarkdown
+Depends: 
+    R (>= 2.10)

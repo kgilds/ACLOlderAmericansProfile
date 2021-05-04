@@ -1,0 +1,10 @@
+// custom class for background
+.navbar-customclass {
+    background-color: red;
+}
+
+
+.container, 
+.navbar-inner {
+    background-color: #cfcfcf !important;
+} 

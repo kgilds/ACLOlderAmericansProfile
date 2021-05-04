@@ -1,0 +1,135 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(httr)
+library(readxl)
+library(dplyr)
+library(esquisse)
+library(ggplot2)
+library(usmap)
+library(ggiraph)
+```
+
+
+
+```{r}
+profile_2019 <- ("https://acl.gov/sites/default/files/Aging%20and%20Disability%20in%20America/2019OlderAmericansData.xlsx")
+
+#url_district <- ("http://www.fldoe.org/core/fileparse.php/18534/urlt/DistrictGrades19.xls")
+
+
+
+httr::GET(profile_2019, write_disk(profile_2019 <- tempfile(fileext = ".xlsx")))
+```
+
+
+
+```{r}
+p_2019 <- readxl::read_xlsx(profile_2019)
+
+excel_sheets(profile_2019)
+
+```
+
+
+```{r}
+pop_state <- read_excel(profile_2019, sheet = 6, skip =  2)
+
+pop_state
+```
+
+
+```{r eval=FALSE}
+esquisse::esquisser(pop_state)
+```
+
+```{r}
+library(scales)
+
+g<- ggplot(pop_state) +
+  aes(
+    x = `Number of Persons 65 and Older`,
+    y = `Percent Increase from 2008 to 2018`
+  ) +
+  geom_point(
+   
+  ) +
+  scale_x_continuous(labels = scales::label_number_si()) +
+  scale_y_continuous(labels = percent) +
+   theme_minimal(base_family = "sans", base_size = 10) 
+
+
+my_gg <- g + geom_point_interactive(aes(tooltip = State), size = 2) 
+girafe(code = print(my_gg) )
+
+```
+
+scale_x_continuous(labels = comma)
+
+```{r}
+
+
+ggplot(pop_state) +
+  aes(
+    x = `Number of Persons 65 and Older`,
+    y = `Percent Below Poverty 2018`
+  ) +
+  geom_point(
+    shape = "diamond open",
+    size = 1.5,
+    colour = "#FF8C00"
+  ) +
+  hrbrthemes::theme_modern_rc()
+
+
+```
+
+
+```{r}
+state_number65plus <- pop_state %>%
+  dplyr::rename(number65plus = "Number of Persons 65 and Older")
+
+state_number65plus$fips <- fips(state_number65plus$State)
+
+head(state_number65plus)
+```
+
+```{r}
+plot_usmap(data = state_number65plus, values = "number65plus",   labels=FALSE) +
+  scale_fill_continuous( low = "white", high = "red", 
+                         name = "Population", label = scales::comma
+  ) + 
+  theme(legend.position = "right") + 
+  theme(panel.background = element_rect(colour = "black")) + 
+  labs(title = "Population of People 65 and Over by State", caption = "Source: @kgilds")
+```
+
+
+
+```{r}
+plot_usmap(data = state_number65plus, values = "Percent Increase from 2008 to 2018",   labels=FALSE) +
+  scale_fill_continuous( low = "white", high = "red", 
+                         name = "Population", label = scales::percent
+  ) + 
+  theme(legend.position = "right") + 
+  theme(panel.background = element_rect(colour = "black")) + 
+  labs(title = "Percent Increase from 2008 to 2018", caption = "Source: @kgilds")
+```
+
+
+
+```{r}
+plot_usmap(data = state_number65plus, values = "Percent Below Poverty 2018",   labels=FALSE) +
+  scale_fill_continuous( low = "white", high = "red", 
+                         name = "Population", label = scales::percent
+  ) + 
+  theme(legend.position = "right") + 
+  theme(panel.background = element_rect(colour = "black")) + 
+  labs(title = "Percent Below Poverty 2018", caption = "Source: @kgilds")
+```
+

@@ -1,0 +1,114 @@
+---
+title: "Person_65_p"
+author: "Kevin Gilds, MPA"
+date: "4/25/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(httr)
+library(readxl)
+library(dplyr)
+library(esquisse)
+library(ggplot2)
+library(gganimate)
+library(ggiraph)
+```
+
+```{r}
+profile_2019 <- ("https://acl.gov/sites/default/files/Aging%20and%20Disability%20in%20America/2019OlderAmericansData.xlsx")
+
+#url_district <- ("http://www.fldoe.org/core/fileparse.php/18534/urlt/DistrictGrades19.xls")
+
+
+
+httr::GET(profile_2019, write_disk(profile_2019 <- tempfile(fileext = ".xlsx")))
+```
+
+
+
+```{r}
+p_2019 <- readxl::read_xlsx(profile_2019)
+
+excel_sheets(profile_2019)
+
+```
+
+```{r}
+person_65_p <- read_excel(profile_2019, sheet = 1, skip =2) %>%
+  dplyr::rename(population = "People 65+")
+  
+  
+names(person_65_p)
+
+```
+
+
+```{r eval=FALSE}
+esquisse::esquisser(person_65_p)
+```
+
+
+```{r eval=TRUE}
+
+
+p <- ggplot(person_65_p) +
+  aes(x = Year, y = population) +
+  geom_point(
+    shape = "diamond open",
+    size = 1.5,
+    colour = "#FF8C00"
+  ) +
+  labs(
+    title = "Number of Persons 65 & Over 1900-2060",
+    subtitle = "Number in Millions",
+    caption = "Source: U.S. Census Bureau,
+ Population Estimates and Projections"
+  ) +
+  
+  hrbrthemes::theme_modern_rc() 
+  
+  
+
+
+
+```
+
+
+```{r}
+ggplot(person_65_p) +
+  aes(x = Year, y = population) +
+  geom_col(
+      width = .1
+  ) +
+  labs(
+    title = "Number of Persons 65 & Over 1900-2060",
+    subtitle = "Number in Millions",
+    caption = "Source: U.S. Census Bureau,
+ Population Estimates and Projections"
+  ) +
+  hrbrthemes::theme_modern_rc()
+```
+
+```{r}
+
+
+ggplot(person_65_p) +
+  aes(x = Year, y = population) +
+  +
+  labs(
+    title = "Number of Persons 65 & Over 1900-2060",
+    subtitle = "Number in Millions",
+    caption = "Source: U.S. Census Bureau,
+ Population Estimates and Projections"
+  ) +
+  hrbrthemes::theme_modern_rc()
+
+
+```
+
+
