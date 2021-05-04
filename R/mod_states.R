@@ -9,16 +9,21 @@
 #' @importFrom shiny NS tagList 
 mod_states_ui <- function(id){
   ns <- NS(id)
-  tagList(
-    fluidPage(
-      fluidRow(
-        shiny::plotOutput(ns("state_num"))
-      )
+  #tagList(
+  bs4Dash::bs4TabItem(
+    tabName = "states_ui_1",
+    shiny::plotOutput(ns("state_num"))
+    
+    
+  )  
+    
+  
+        
       
       
-    )
+    
  
-  )
+  #)
 }
     
 #' states Server Function

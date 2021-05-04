@@ -9,18 +9,27 @@
 #' @importFrom shiny NS tagList 
 mod_population_65_plus_ui <- function(id){
   ns <- NS(id)
-  tagList(
-    fluidPage(
-      
+  #tagList(
+  bs4Dash::bs4TabItem(
+    tabName = "population_65_plus_ui_1",
     
-  h1("America's Aging Population"),  
-  p(style="padding: 10px; border: 2px solid red;", "TEXT"),
-  
+  bs4Dash::bs4Card(
+    title = "America's Aging Population",
+    width = 12,
+    maximizable = TRUE,
+    status = "primary",
+    p(style="padding: 10px; border: 2px solid red;", "TEXT"),
+    
+    
     plotly::plotlyOutput(ns("plot1"))
+    
+  )  
+    
   
   
   )
-  )
+  #)
+  
 }
     
 #' population_65_plus Server Function
