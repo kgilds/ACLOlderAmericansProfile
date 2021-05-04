@@ -35,7 +35,7 @@ persongs_65_plot <- function() {
 #' 
 number_state_map <- function(){
   plot_usmap(data = state_profile, values = "Number of Persons 65 and Older", labels = FALSE) +
-    scale_fill_continuous( low = "white", high = "#be1e2d", 
+    scale_fill_continuous( low = "white", high = "purple", 
                            name = "Population", label = scales::label_number_si()) + 
     theme(legend.position = "right") + 
     theme(panel.background = element_rect(colour = "black")) + 

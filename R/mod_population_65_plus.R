@@ -17,10 +17,16 @@ mod_population_65_plus_ui <- function(id){
     title = "America's Aging Population",
     width = 12,
     maximizable = TRUE,
-    status = "primary",
+    status = "purple",
     p(style="padding: 10px; border: 2px solid red;", "TEXT"),
     
-    
+    descriptionBlock(
+      header = "Projected Increase by 2050",
+      number =  "54.19% increase from 2018",
+      number_color =  "danger",
+      right_border =   TRUE,
+      margin_bottom =  FALSE
+    ),
     plotly::plotlyOutput(ns("plot1"))
     
   )  

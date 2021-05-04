@@ -16,14 +16,14 @@ app_ui <- function(request) {
       enable_preloader = TRUE,
       
       navbar = bs4Dash::bs4DashNavbar(
-        status = "warning",  
+        status = "purple",  
         "Profile of Older Americans"
         
       ),#navbar
       sidebar_collapsed = TRUE,
       sidebar = bs4Dash::bs4DashSidebar(
         skin = "light",
-        status = "danger",
+        status = "purple",
         title = "Profile of Older Americans",
       
       bs4Dash::bs4SidebarMenu(
