@@ -15,20 +15,17 @@ mod_states_ui <- function(id){
     
     fluidRow(
       bs4Dash::bs4Card(
-        title = "Population 65 & older by State",
-        width = 6,
+        title = "State Populations",
+        width = 12,
         status = "purple",
         maximizable = TRUE,
-        descriptionBlock(
-          number =  "",
-          header = "Number of Entries",
-          
-          number_color =  "danger",
-          right_border =   TRUE,
-          margin_bottom =  FALSE
-        ),
-        
-        shiny::plotOutput(ns("state_num"))
+        overflow = TRUE,
+        h1("Population 65 & older by State"),
+        plotly::plotlyOutput(ns("state_pop_m")),
+        h1("Percent Increase from 2008-2018"),
+        plotly::plotlyOutput(ns("state_pop_increase")),
+        h1("Percent Below Poverty 2018"),
+        plotly::plotlyOutput(ns("below_poverty"))
         
       )
     )
@@ -52,7 +49,83 @@ mod_states_ui <- function(id){
 mod_states_server <- function(input, output, session){
   ns <- session$ns
   
-output$state_num <- shiny::renderPlot({
+
+ 
+    
+state_pop <- 
+      state_profile %>%
+      dplyr::rename(state_name = State,
+                    population65plus = "Number of Persons 65 and Older",
+                    percent_increase = "Percent Increase from 2008 to 2018",
+                    below_poverty = "Percent Below Poverty 2018") 
+    
+    states_sf <- urbnmapr::get_urbn_map(map = "states", sf = TRUE) %>%
+    dplyr::left_join(state_pop, by = "state_name")  
+      
+      
+      
+      states <- get_urbn_map(map = "states", sf = TRUE) %>% 
+        dplyr::left_join(state_pop, by = "state_name")
+      
+      
+      
+output$state_pop_m <- plotly::renderPlotly({
+  
+  urbnthemes::set_urbn_defaults(style = "map")
+  
+  
+  ggplot() +
+    geom_sf(states_sf,
+            mapping = aes(fill = population65plus, label = state_name),
+            color = "#ffffff", size = 0.25)  +
+    scale_fill_continuous( low = "grey", high = "purple", 
+                           name = "Population 65 Plus", label = scales::label_number_si()) +
+    theme(panel.background = element_rect(colour = "black"))
+  
+  
+})      
+
+
+
+
+output$state_pop_increase <-plotly::renderPlotly({
+  
+  urbnthemes::set_urbn_defaults(style = "map")
+  
+  
+  ggplot() +
+    geom_sf(states_sf,
+            mapping = aes(fill = percent_increase, label = state_name),
+            color = "#ffffff", size = 0.25)  +
+    scale_fill_continuous( low = "grey", high = "purple", 
+                           name = "Percent Below Poverty 2018", label = scales::percent
+    ) +  
+    theme(panel.background = element_rect(colour = "black"))
+  
+  
+})
+
+output$below_poverty <-plotly::renderPlotly({
+  
+  urbnthemes::set_urbn_defaults(style = "map")
+  
+  
+  ggplot() +
+    geom_sf(states_sf,
+            mapping = aes(fill = below_poverty, label = state_name),
+            color = "#ffffff", size = 0.25)  +
+    scale_fill_continuous( low = "grey", high = "purple", 
+                           name = "Percent Below Poverty 2018", label = scales::percent
+    ) +  
+    theme(panel.background = element_rect(colour = "black"))
+  
+  
+})
+
+
+      
+  
+  output$state_num <- shiny::renderPlot({
   
   number_state_map()
    
