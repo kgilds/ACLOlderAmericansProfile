@@ -30,6 +30,7 @@ usethis::use_package("urbnthemes")
 ## Create a module infrastructure in R/
 golem::add_module( name = "population_65_plus" ) # Name of the module
 golem::add_module( name = "states" ) # Name of the module
+golem::add_module( name = "about")
 
 ## Add helper functions ----
 ## Creates ftc_* and utils_*
