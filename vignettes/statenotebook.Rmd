@@ -91,6 +91,11 @@ ggplot(pop_state) +
 
 
 ```{r}
+usmap::fips()
+```
+
+
+```{r}
 state_number65plus <- pop_state %>%
   dplyr::rename(number65plus = "Number of Persons 65 and Older")
 

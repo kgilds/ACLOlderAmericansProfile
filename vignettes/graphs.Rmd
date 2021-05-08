@@ -1,0 +1,44 @@
+---
+title: "GRAPHS"
+author: "Kevin Gilds, MPA"
+date: "5/8/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ACLOlderAmericansProfile)
+library(esquisse)
+```
+
+
+```{r}
+
+esquisse::esquisser(profile_data[[12]])
+```
+
+
+
+```{r}
+
+
+ggplot(`profile_data[[7]]`) +
+  aes(x = Income, weight = Households) +
+  geom_bar(fill = "#112446") +
+  theme_minimal()
+
+
+```
+
+
+```{r}
+
+
+
+
+
+
+
+```
+

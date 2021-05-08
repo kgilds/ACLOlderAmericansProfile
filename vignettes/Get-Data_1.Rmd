@@ -46,7 +46,7 @@ person_65_p <- read_excel(profile_2019, sheet = 1, skip =2) %>%
 dplyr::glimpse()
 ```
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 esquisse::esquisser(person_65_p)
 ```
 

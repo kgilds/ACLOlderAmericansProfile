@@ -1,0 +1,104 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(urbnmapr)
+library(urbnthemes)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+library(ACLOlderAmericansProfile)
+
+
+set_urbn_defaults(style = "map")
+
+states_sf <- get_urbn_map("states", sf = TRUE) %>%
+  left_join(statedata, by = "state_name")
+
+
+ggplot() +
+  geom_sf(states_sf,
+          mapping = aes(fill = horate),
+          color = "#ffffff", size = 0.25) +
+  labs(fill = "Homeownership rate")
+  
+
+#states_sf %>% 
+  
+  #ggplot(aes(fill = horate)) +
+  #geom_sf(fill = "grey", color = "#ffffff")
+
+
+#mapping = aes(fill = horate),
+          #color = "#ffffff", size = 0.25) +
+  #labs(fill = "Homeownership rate")
+
+```
+
+
+```{r}
+
+
+data_shape %>% 
+  left_join(dummy_data,by = "NAME") -> merged_1
+```
+
+
+
+```{r}
+
+state_profile_n <- state_profile %>%
+  dplyr::rename(state_name = State,
+                population65plus = "Number of Persons 65 and Older")
+
+
+
+states <- get_urbn_map(map = "states", sf = TRUE) %>% 
+  dplyr::left_join(state_profile_n, by = "state_name")
+
+
+
+
+
+ggplot() +
+  geom_sf(states,
+          mapping = aes(fill = population65plus),
+          color = "#ffffff", size = 0.25)  +
+  scale_fill_continuous( low = "grey", high = "purple", 
+                           name = "Population 65 Plus", label = scales::label_number_si()) 
+
+states
+```
+
+
+```{r}
+spatial_data <- left_join(statedata,
+                          get_urbn_map(map = "states", sf = TRUE),
+                          by = "state_name")
+
+ggplot() +
+  geom_sf(spatial_data,
+          mapping = aes(fill = horate),
+          color = "#ffffff", size = 0.25) +
+  labs(fill = "Homeownership rate")
+```
+
+
+```{r}
+states_sf <- get_urbn_map(map = "states", sf = TRUE)
+
+states_sf %>%
+  ggplot() +
+  geom_sf(aes(), 
+          fill = "grey", color = "#ffffff", size = 0.25) +
+  geom_sf_text(data = get_urbn_labels(map = "states", sf = TRUE), 
+                aes(label = state_abbv), 
+            size = 3)
+```
+
+
+
