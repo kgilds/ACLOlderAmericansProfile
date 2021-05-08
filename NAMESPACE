@@ -3,6 +3,7 @@
 export(number_state_map)
 export(persongs_65_plot)
 export(run_app)
+export(state65plus_m)
 import(ggplot2)
 import(shiny)
 import(usmap)
