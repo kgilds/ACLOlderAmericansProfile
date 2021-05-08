@@ -29,6 +29,12 @@ app_ui <- function(request) {
       bs4Dash::bs4SidebarMenu(
         id = "current_tab",
         bs4Dash::bs4SidebarHeader("Menu"),
+        
+        bs4Dash::bs4SidebarMenuItem(
+          "About",
+          tabName = "about_ui_1"
+        ),
+        
         bs4Dash::bs4SidebarMenuItem(
           "Home",
           tabName = "population_65_plus_ui_1",
@@ -43,7 +49,8 @@ app_ui <- function(request) {
     body = bs4Dash::bs4DashBody(
       bs4Dash::bs4TabItems(
         mod_population_65_plus_ui("population_65_plus_ui_1"),
-        mod_states_ui("states_ui_1")
+        mod_states_ui("states_ui_1"),
+        mod_about_ui("about_ui_1")
       )),#body
     footer =  bs4DashFooter(
       copyrights = a(
