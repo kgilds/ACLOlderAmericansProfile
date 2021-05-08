@@ -20,6 +20,11 @@ usethis::use_package("ggplot2")
 usethis::use_package("fullPage")
 usethis::use_package("bslib")
 usethis::use_package("usmap")
+usethis::use_package("bs4Dash")
+usethis::use_package("dplyr")
+usethis::use_package("urbnmapr")
+usethis::use_package("urbnthemes")
+
 
 ## Add modules ----
 ## Create a module infrastructure in R/
