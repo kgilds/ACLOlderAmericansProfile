@@ -43,3 +43,27 @@ number_state_map <- function(){
   
   
 }
+
+' state65plus_m'
+#' @description 
+#' Uses the state profile data set to display population date of persons over 
+#' the age of 65 on US Map. 
+#' @import ggplot2
+#' @return 
+#' @export
+
+state65plus_m <- function(df){
+  
+  urbnthemes::set_urbn_defaults(style = "map")
+  
+  df %>%
+  ggplot() +
+    geom_sf(
+            mapping = aes(fill = population65plus, label = state_name),
+            color = "#ffffff", size = 0.25)  +
+    scale_fill_continuous( low = "grey", high = "purple", 
+                           name = "Population 65 Plus", label = scales::label_number_si()) +
+    theme(panel.background = element_rect(colour = "black"))
+  
+  
+}
