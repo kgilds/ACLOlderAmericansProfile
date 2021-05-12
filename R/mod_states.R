@@ -5,7 +5,7 @@
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @noRd 
-#'
+#' @import dplyr 
 #' @importFrom shiny NS tagList 
 mod_states_ui <- function(id){
   ns <- NS(id)
@@ -15,7 +15,7 @@ mod_states_ui <- function(id){
     
     fluidRow(
       bs4Dash::bs4Card(
-        title = "State Populations",
+        title = "State Data",
         width = 12,
         status = "purple",
         maximizable = TRUE,
@@ -64,7 +64,7 @@ state_pop <-
       
       
       
-      states <- get_urbn_map(map = "states", sf = TRUE) %>% 
+      states <- urbnmapr::get_urbn_map(map = "states", sf = TRUE) %>% 
         dplyr::left_join(state_pop, by = "state_name")
       
       
@@ -98,7 +98,7 @@ output$state_pop_increase <-plotly::renderPlotly({
             mapping = aes(fill = percent_increase, label = state_name),
             color = "#ffffff", size = 0.25)  +
     scale_fill_continuous( low = "grey", high = "purple", 
-                           name = "Percent Below Poverty 2018", label = scales::percent
+                           name = "Percent increase from 2008-2018", label = scales::percent
     ) +  
     theme(panel.background = element_rect(colour = "black"))
   
