@@ -22,11 +22,9 @@ mod_about_ui <- function(id){
        status = "purple", 
        solidHeader = TRUE,
        
-       p("May is Older Americans Month and the theme is Communities of Strength"
-         
-       )
+       includeMarkdown("inst/about.md")
        
-       
+      
      
    )
    
