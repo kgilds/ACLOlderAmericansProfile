@@ -24,8 +24,10 @@ usethis::use_package("bs4Dash")
 usethis::use_package("dplyr")
 usethis::use_package("urbnmapr")
 usethis::use_package("urbnthemes")
-
-
+usethis::use_package("plotly")
+usethis::use_package("waiter")
+usethis::use_package("hrbrthemes")
+usethis::use_package("ggtext")
 ## Add modules ----
 ## Create a module infrastructure in R/
 golem::add_module( name = "population_65_plus" ) # Name of the module
