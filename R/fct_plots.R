@@ -3,12 +3,12 @@
 #' @description 
 #' Plot population points of Americans over the age of 65 by year and projections
 #' to 2060. 
-#' @import ggplot2 ggtext
+#' @import ggplot2 
 #' @return
 #' @export
 #'
 #' 
-persongs_65_plot <- function() {
+persons_65_plot <- function() {
   ggplot(person_65_p) +
     aes(x = Year, y = population) +
     geom_step(size = 0.5, colour = "#f9a21a"
@@ -36,7 +36,6 @@ persongs_65_plot <- function() {
 #' @description 
 #' Uses the state profile data set to display population date of persons over 
 #' the age of 65 on US Map. 
-#' @import usmap
 #' @return a map
 #' @export
 #'
@@ -52,7 +51,7 @@ number_state_map <- function(){
   
 }
 
-' state65plus_m'
+#' state65plus_m
 #' @description 
 #' Uses the state profile data set to display population date of persons over 
 #' the age of 65 on US Map. 
