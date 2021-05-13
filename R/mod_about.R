@@ -20,7 +20,8 @@ mod_about_ui <- function(id){
        width = 12,
        title= "About", 
        status = "purple", 
-       solidHeader = TRUE,
+       maximizable = TRUE,
+       overflow = TRUE,
        
        includeMarkdown("inst/about.md")
        
