@@ -23,9 +23,8 @@ mod_states_ui <- function(id){
         h1("Population 65 & older by State"),
         plotly::plotlyOutput(ns("state_pop_m")),
         h1("Percent Increase from 2008-2018"),
-        plotly::plotlyOutput(ns("state_pop_increase")),
-        h1("Percent Below Poverty 2018"),
-        plotly::plotlyOutput(ns("below_poverty"))
+        plotly::plotlyOutput(ns("state_pop_increase"))
+        
         
       )
     )
@@ -105,22 +104,7 @@ output$state_pop_increase <-plotly::renderPlotly({
   
 })
 
-output$below_poverty <-plotly::renderPlotly({
-  
-  urbnthemes::set_urbn_defaults(style = "map")
-  
-  
-  ggplot() +
-    geom_sf(states_sf,
-            mapping = aes(fill = below_poverty, label = state_name),
-            color = "#ffffff", size = 0.25)  +
-    scale_fill_continuous( low = "grey", high = "purple", 
-                           name = "Percent Below Poverty 2018", label = scales::percent
-    ) +  
-    theme(panel.background = element_rect(colour = "black"))
-  
-  
-})
+
 
 
       
