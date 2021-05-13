@@ -37,7 +37,7 @@ mod_population_65_plus_server <- function(input, output, session){
   
 
 output$plot1 <- plotly::renderPlotly({
-  persongs_65_plot()
+  persons_65_plot()
 })
 
  
