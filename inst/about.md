@@ -2,7 +2,7 @@
 
 # <a href="https://acl.gov/oam/2021/older-americans-month-2021" style="color: #800080" target="_blank"> May is Older Americans Month </a>
 
-<img src="https://acl.gov/sites/default/files/inline-images/OAM2021_documentheader_0.jpg" alt="Older Americans Month" width="700" height="600"> 
+<img src="https://acl.gov/sites/default/files/inline-images/OAM2021_documentheader_0.jpg" alt="Older Americans Month" width="750" height="600"> 
 <p style="font-family:leto;">
 <font size="5"> 
 
